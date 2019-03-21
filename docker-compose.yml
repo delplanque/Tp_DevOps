@@ -18,7 +18,7 @@ php:
 db:
   image: mariadb:10.1
   volumes:
-  - ./install/maria:/docker-entrypoint-initdb.d/maria
+  - ./install/maria:/dockermaria/maria
   ports:
     - 3308:3306
   environment: 

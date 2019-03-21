@@ -9,9 +9,9 @@ job('Tp_Dev') {
         scm('H/60 * * * *')
     }
     wrappers {
-        nodejs('NodeJS9')
+        phpunit('Phpunit')
     }
     steps {
-        shell("docker-compose up")
+        shell("phpunit testPhp.php")
     }
 }
