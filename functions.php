@@ -64,9 +64,49 @@ function pageContent()
 }
 
 /**
+ * Check for required versions.
+ */
+function checkRequiredVersions()
+{
+    $nginx_version = $_SERVER['SERVER_SOFTWARE'];
+    $nginx_required_version = config('nginx_version');
+    $php_version = $_SERVER['PHP_VERSION'];
+    $php_required_version = config('php_version');
+
+//    printf("NGINX Version: %s /// %s\n", $nginx_version, $nginx_required_version);
+//    printf("PHP Version: %s /// %s\n", $php_version, $php_required_version);
+
+    if(strpos($nginx_version, $nginx_required_version) === false)
+        die("Wrong NGINX Version");
+
+    if(strpos($php_version, $php_required_version) === false)
+        die("Wrong PHP Version");
+
+    $extensions = config('php_modules');
+    foreach ($extensions as $extension) {
+        if(!extension_loaded($extension))
+            die("Missing PHP Extension");
+    }
+
+    $mysqli = new mysqli("db", config('db_user'), config('db_password'));
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+    $mariadb_version = $mysqli->server_info;
+    $mariadb_required_version = config('mariadb_version');
+    $mysqli->close();
+
+    if(strpos($mariadb_version, $mariadb_required_version) === false)
+        die("Wrong MariaDB Version");
+}
+
+/**
  * Starts everything and displays the template.
  */
 function run()
 {
+    checkRequiredVersions();
     include config('template_path').'/template.php';
 }
+
