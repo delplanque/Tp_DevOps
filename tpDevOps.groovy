@@ -9,10 +9,9 @@ job('Tp_Dev') {
         scm('H/60 * * * *')
     }
     wrappers {
-        nodejs('NodeJS9')
+        phpunit('Phpunit')
     }
     steps {
-        shell("npm install")
-        shell("npm test")
+        shell("phpunit testPhp.php")
     }
 }
