@@ -1,5 +1,5 @@
 web:
-  image: nginx:latest
+  image: nginx:1.12
   ports:
     - "8081:80"
   volumes:
