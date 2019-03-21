@@ -8,4 +8,4 @@ En se rendant sur le http://localhost:8081/ on peut voir que le site est focntio
 
 
 Ensuite pour la partie Jenkins,
-On
+On crée le job qui permettra de lancer le script groovy permettant ensuite d'effectuer les test.
