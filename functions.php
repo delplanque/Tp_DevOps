@@ -87,6 +87,7 @@ function checkRequiredVersions()
         if(!extension_loaded($extension))
             die("Missing PHP Extension");
     }
+    
     $mysqli = new mysqli("db", config('db_user'), config('db_password'));
     if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
